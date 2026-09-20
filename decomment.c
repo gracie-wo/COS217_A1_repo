@@ -98,12 +98,7 @@ int main(void){
     int status = EXIT_SUCCESS;
     enum Statetype state = NOT_COMMENT;
 
-    if(c == '\n' && status != EXIT_FAILURE){
-        linenum++;
-    }
-
     while((c = getchar()) != EOF){
-
         switch(state){
             case NOT_COMMENT:
                 state = handleNotCommentState(c);
@@ -141,6 +136,10 @@ int main(void){
                 state = handleCharState(c);
                 status = EXIT_SUCCESS;
                 break;
+        }
+
+        if(c == '\n' && status != EXIT_FAILURE){
+            linenum++;
         }
     } 
     
