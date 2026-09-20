@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/graceh/COS217/COS217_A1_repo/decomment'
+relocations:     []
+...
