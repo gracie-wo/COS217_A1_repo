@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
-enum Statetype {NOT_COMMENT, SLASH, SLASH_STAR, SLASH_STAR_STAR, COMMENT, STRING, BACKSLASH, CHAR};
+enum Statetype {NOT_COMMENT, SLASH, SLASH_STAR, SLASH_STAR_STAR, COMMENT, STRING, BACKSLASH_STRING, BACKSLASH_CHAR, CHAR};
 
 enum Statetype handleNotCommentState(int c){
     if(c == '/'){
@@ -59,35 +59,32 @@ enum Statetype handleStringState(int c){
     if(c == '"'){
         putchar(c);
         return NOT_COMMENT;
-    } else if (c == '\n'){
+    } else if(c == '\\'){
         putchar(c);
-        return STRING;
-    }
-    else if(c == '\\'){
-        putchar(c);
-        return BACKSLASH;
+        return BACKSLASH_STRING;
     } else {
         putchar(c);
         return STRING;
     }
 }
 
-enum Statetype handleBackslashState(int c){
+enum Statetype handleBackslashStringState(int c){
     putchar(c);
     return STRING;
+}
+
+enum Statetype handleBackslashCharState(int c){
+    putchar(c);
+    return CHAR;
 }
 
 enum Statetype handleCharState(int c){
     if(c == '\''){
         putchar(c);
         return NOT_COMMENT;
-    } else if (c == '\n'){
+    } else if(c == '\\'){
         putchar(c);
-        return CHAR;
-    }
-    else if(c == '\\'){
-        putchar(c);
-        return BACKSLASH;
+        return BACKSLASH_CHAR;
     } else {
         putchar(c);
         return CHAR;
@@ -101,10 +98,11 @@ int main(void){
     int status = EXIT_SUCCESS;
     enum Statetype state = NOT_COMMENT;
 
+    if(c == '\n' && status != EXIT_FAILURE){
+        linenum++;
+    }
+
     while((c = getchar()) != EOF){
-        if(c == '\n'){
-            linenum++;
-        }
 
         switch(state){
             case NOT_COMMENT:
@@ -131,8 +129,12 @@ int main(void){
                 state = handleStringState(c);
                 status = EXIT_SUCCESS;
                 break;
-            case BACKSLASH:
-                state = handleBackslashState(c);
+            case BACKSLASH_STRING:
+                state = handleBackslashStringState(c);
+                status = EXIT_SUCCESS;
+                break;
+            case BACKSLASH_CHAR:
+                state = handleBackslashCharState(c);
                 status = EXIT_SUCCESS;
                 break;
             case CHAR:
