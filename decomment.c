@@ -140,5 +140,3 @@ int main(void){
 
     return status;
 }
-
-#FIX THE DFA
