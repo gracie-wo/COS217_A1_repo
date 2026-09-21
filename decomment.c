@@ -5,6 +5,7 @@ enum Statetype {NOT_COMMENT, SLASH, SLASH_STAR, SLASH_STAR_STAR, STRING, BACKSLA
 
 enum Statetype handleNotCommentState(int c){
     if(c == '/'){
+        putchar(c);
         return SLASH;
     } else if(c == '"'){
         putchar(c);
@@ -20,21 +21,19 @@ enum Statetype handleNotCommentState(int c){
 
 enum Statetype handleSlashState(int c){
     if(c == '*'){
+        putchar('\b');
         putchar(' ');
         return SLASH_STAR;
     } else if(c == '/'){
-        putchar('/');  
+        putchar(c);
         return SLASH;
     } else if(c == '"'){
-        putchar('/');
         putchar(c);
         return STRING;
     } else if(c == '\''){
-        putchar('/');
         putchar(c);
         return CHAR;
     } else {
-        putchar('/');
         putchar(c);
         return NOT_COMMENT;
     }
