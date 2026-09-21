@@ -145,11 +145,12 @@ int main(void){
         }
 
         if(c == '\n'){
+            if(status != EXIT_FAILURE){
+                errorline++; 
+            } else if(status == EXIT_SUCCESS){
+                errorline = linenum;
+            }
             linenum++;
-        }
-
-        if(status == EXIT_FAILURE && state == SLASH_STAR){
-            errorline = linenum;
         }
     } 
 
