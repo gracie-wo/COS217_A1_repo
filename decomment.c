@@ -25,7 +25,7 @@ enum Statetype handleSlashState(int c){
     } else {
         putchar('/');
         putchar(c);
-        return NOT_COMMENT;
+        return SLASH;
     }
 }
 
