@@ -146,9 +146,6 @@ int main(void){
 
         if(c == '\n'){
             linenum++;
-            if(status != EXIT_FAILURE){
-                errorline++; 
-            } 
             
             if(status == EXIT_SUCCESS){
                 errorline = linenum;
