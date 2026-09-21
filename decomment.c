@@ -148,9 +148,9 @@ int main(void){
             linenum++;
             if(status != EXIT_FAILURE){
                 errorline++; }
-            // } else if(status == EXIT_SUCCESS){
-            //     errorline = linenum;
-            // }
+            /* } else if(status == EXIT_SUCCESS){
+                errorline = linenum;
+            }*/
         }
     } 
 
