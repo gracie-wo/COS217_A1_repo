@@ -40,7 +40,7 @@ enum Statetype handleSlashStarState(int c){
     }
 }
 
-enum Statetype COMMENT(int c){
+enum Statetype handleSlashStarStarState(int c){
     if(c == '/'){
         return NOT_COMMENT;
     } else if(c == '*'){
@@ -140,3 +140,5 @@ int main(void){
 
     return status;
 }
+
+//FIX THE DFA
