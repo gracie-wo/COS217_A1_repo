@@ -144,6 +144,10 @@ int main(void){
             linenum++;
         }
     } 
+
+    if(state == SLASH){
+        putchar('/');
+    }
     
     if(status == EXIT_FAILURE){
         fprintf(stderr, "Error: lines %d: unterminated comment", linenum);
