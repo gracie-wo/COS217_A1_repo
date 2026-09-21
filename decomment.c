@@ -104,7 +104,7 @@ int main(void){
     int c;
     int LINE_START = 1; 
     int linenum = LINE_START;
-    int errorline;
+    int errorline = LINE_START;
     int status = EXIT_SUCCESS;
     enum Statetype state = NOT_COMMENT;
 
