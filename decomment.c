@@ -25,6 +25,14 @@ enum Statetype handleSlashState(int c){
     } else if(c == '/'){
         putchar('/');  
         return SLASH;
+    } else if(c == '"'){
+        putchar('/');
+        putchar(c);
+        return STRING;
+    } else if(c == '\''){
+        putchar('/');
+        putchar(c);
+        return CHAR;
     } else {
         putchar('/');
         putchar(c);
