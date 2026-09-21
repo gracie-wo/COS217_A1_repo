@@ -56,6 +56,9 @@ enum Statetype handleSlashStarStarState(int c){
         return NOT_COMMENT;
     } else if(c == '*'){
         return SLASH_STAR_STAR;
+    } else if(c == '\n'){
+        putchar(c);
+        return SLASH_STAR;
     } else {
         return SLASH_STAR;
     }
