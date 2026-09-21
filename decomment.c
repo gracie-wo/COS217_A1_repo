@@ -22,6 +22,8 @@ enum Statetype handleSlashState(int c){
     if(c == '*'){
         putchar(' ');
         return SLASH_STAR;
+    } else if(c == '/'){
+        putchar('/');  
     } else {
         putchar('/');
         putchar(c);
