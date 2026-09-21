@@ -148,7 +148,9 @@ int main(void){
             linenum++;
             if(status != EXIT_FAILURE){
                 errorline++; 
-            } else if(status == EXIT_SUCCESS){
+            } 
+            
+            if(status == EXIT_SUCCESS){
                 errorline = linenum;
             }
         }
@@ -159,7 +161,7 @@ int main(void){
     }
     
     if(status == EXIT_FAILURE){
-        fprintf(stderr, "Error: line %d: unterminated comment\n", errorline);
+        fprintf(stderr, "Error: line %d: unterminated comment\n", linenum);
     }
 
     return status;
