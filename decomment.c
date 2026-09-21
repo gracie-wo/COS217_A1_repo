@@ -24,10 +24,11 @@ enum Statetype handleSlashState(int c){
         return SLASH_STAR;
     } else if(c == '/'){
         putchar('/');  
+        return SLASH;
     } else {
         putchar('/');
         putchar(c);
-        return SLASH;
+        return NOT_COMMENT;
     }
 }
 
