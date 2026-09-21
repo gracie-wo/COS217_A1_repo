@@ -56,6 +56,9 @@ enum Statetype handleSlashStarStarState(int c){
         return NOT_COMMENT;
     } else if(c == '*'){
         return SLASH_STAR_STAR;
+    } else if(c == '\n'){
+        putchar(c);
+        return SLASH_STAR;
     } else {
         return SLASH_STAR;
     }
@@ -101,6 +104,7 @@ int main(void){
     int c;
     int LINE_START = 1; 
     int linenum = LINE_START;
+    int errorline;
     int status = EXIT_SUCCESS;
     enum Statetype state = NOT_COMMENT;
 
@@ -140,13 +144,22 @@ int main(void){
                 break;
         }
 
-        if(c == '\n' && status != EXIT_FAILURE){
+        if(c == '\n'){
             linenum++;
+            if(status != EXIT_FAILURE){
+                errorline++; 
+            } else if(status == EXIT_SUCCESS){
+                errorline = linenum;
+            }
         }
     } 
+
+    if(state == SLASH){
+        putchar('/');
+    }
     
     if(status == EXIT_FAILURE){
-        fprintf(stderr, "Error: lines %d: unterminated comment", linenum);
+        fprintf(stderr, "Error: line %d: unterminated comment\n", errorline);
     }
 
     return status;
