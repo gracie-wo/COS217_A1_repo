@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
-enum Statetype {NOT_COMMENT, SLASH, SLASH_STAR, SLASH_STAR_STAR, COMMENT, STRING, BACKSLASH_STRING, BACKSLASH_CHAR, CHAR};
+enum Statetype {NOT_COMMENT, SLASH, SLASH_STAR, SLASH_STAR_STAR, STRING, BACKSLASH_STRING, BACKSLASH_CHAR, CHAR};
 
 enum Statetype handleNotCommentState(int c){
     if(c == '/'){
@@ -40,19 +40,14 @@ enum Statetype handleSlashStarState(int c){
     }
 }
 
-enum Statetype handleSlashStarStarState(int c){
+enum Statetype COMMENT(int c){
     if(c == '/'){
-        return COMMENT;
+        return NOT_COMMENT;
     } else if(c == '*'){
         return SLASH_STAR_STAR;
     } else {
         return SLASH_STAR;
     }
-}
-
-enum Statetype handleCommentState(int c){
-    putchar(c);
-    return NOT_COMMENT;
 }
 
 enum Statetype handleStringState(int c){
@@ -115,10 +110,6 @@ int main(void){
             case SLASH_STAR_STAR:
                 state = handleSlashStarStarState(c);
                 status = EXIT_FAILURE;
-                break;
-            case COMMENT:
-                state = handleCommentState(c);
-                status = EXIT_SUCCESS;
                 break;
             case STRING:
                 state = handleStringState(c);
