@@ -1,0 +1,42 @@
+========================================================================
+TextualDFA A1
+Author: Grace Hua
+========================================================================
+
+NOT_IN_COMMENT (accept) <-- the start state
+    ''': IN_CHAR
+    '"': IN_STRING
+    '/': SLASH  
+    other: NOT_IN_COMMENT
+
+IN_CHAR (accept)
+    ''': NOT_IN_COMMENT
+    '\': ESCAPE_IN_CHAR
+    other: IN_CHAR
+
+ESCAPE_IN_CHAR (accept)
+    other: IN_CHAR
+
+IN_STRING (accept)
+    '"': NOT_IN_COMMENT
+    '\': ESCAPE_IN_STRING
+    other: IN_STRING
+
+ESCAPE_IN_STRING (accept)
+    other: IN_STRING
+
+SLASH (accept)
+    '/': SLASH
+    '*': IN_COMMENT
+    ''': IN_CHAR
+    '"': IN_STRING
+    other: NOT_IN_COMMENT
+
+IN_COMMENT (reject)
+    '*': IN_COMMENT_STAR
+    other: IN_COMMENT
+
+IN_COMMENT_STAR (reject)
+    '*': IN_COMMENT_STAR
+    '/': NOT_IN_COMMENT
+    other: IN_COMMENT
